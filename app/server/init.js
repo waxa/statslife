@@ -13,8 +13,8 @@ require('./database')(mongoose, mongooseUri);
 require('./users').model(mongoose);
 
 //setUp middleware
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 app.use('/', express.static(__dirname + '/../client/www'));
 
 //setUp user middleware like errorHandler
