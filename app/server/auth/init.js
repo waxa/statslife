@@ -4,11 +4,10 @@ const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose');
 const User  = mongoose.model('User');
 
-const authMiddleware = require('./auth-middleware')
+const authMiddleware = require('./auth-middleware');
 
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const mongoUri = require('../../config/database').options.uri;
 
 function findUser (username, callback) {
   User.findOne({
@@ -50,7 +49,7 @@ function setPassport (app) {
   passport.authMiddleware = authMiddleware;
 };
 
-function initPassport (app) {
+function initPassport (app, mongoUri) {
   var store = new MongoDBStore({
     uri: mongoUri,
     collection: 'mySessions'

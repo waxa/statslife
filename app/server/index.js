@@ -1,4 +1,4 @@
 module.exports = {
-  init: require('./init'),
+  app: require('./init'),
   options: require('./options')
 };
