@@ -15,7 +15,7 @@ require('./users').model(mongoose);
 //setUp middleware
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
-app.use('/', express.static(__dirname + '/../client'));
+app.use('/', express.static(__dirname + '/../client/www'));
 
 //setUp user middleware like errorHandler
 require('./middleware').init(app);
