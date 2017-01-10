@@ -10,6 +10,7 @@ const app = express();
 require('./database')(mongoose, mongooseUri);
 
 //setUp models
+require('./tasks').model(mongoose);
 require('./users').model(mongoose);
 
 //setUp middleware
@@ -25,6 +26,7 @@ require('./auth').init(app, mongooseUri);
 
 //setUp routes
 require('./auth').route(app); // /login
-require('./users').route(app); // /user
+require('./users').route(app); // /users
+require('./tasks').route(app); // /tasks
 
 module.exports = app;

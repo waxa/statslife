@@ -1,8 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 
-const mongoose = require('mongoose');
-const User  = mongoose.model('User');
+const User = require('mongoose').model('User');
 
 const authMiddleware = require('./auth-middleware');
 
