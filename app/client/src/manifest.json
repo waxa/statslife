@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Stats Life",
+  "short_name": "statslife",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

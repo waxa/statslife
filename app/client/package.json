@@ -1,6 +1,12 @@
 {
-  "name": "Stats Life",
-  "author": "waxaman@gmail.com",
+  "name": "statslife-client",
+  "version": "0.1.0",
+  "author": {
+    "name": "Víctor <waxa> Lara",
+    "email": "waxaman@gmail.com"
+  },
+  "description": "Stats Life: Control your proposites",
+  "license": "MIT",
   "homepage": "https://github.com/waxa/statslife",
   "private": true,
   "scripts": {
@@ -29,6 +35,5 @@
   "devDependencies": {
     "@ionic/app-scripts": "0.0.47",
     "typescript": "2.0.9"
-  },
-  "description": "Stats Life: control your proposites"
+  }
 }

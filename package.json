@@ -1,13 +1,16 @@
 {
-  "name": "statslife",
+  "name": "statslife-server",
   "version": "0.1.0",
-  "description": "Stats Life: control your proposites",
+  "description": "Stats Life: Control your proposites",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "waxaman@gmail.com",
+  "author": {
+    "name": "Víctor <waxa> Lara",
+    "email": "waxaman@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.2",
