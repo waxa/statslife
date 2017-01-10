@@ -1,7 +1,7 @@
 {
-  "name": "mmorpg-dark-incremental-game-api",
-  "version": "1.0.0",
-  "description": "",
+  "name": "statslife",
+  "version": "0.1.0",
+  "description": "Stats Life: control your proposites",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Stats Life",
+  "author": "waxaman@gmail.com",
+  "homepage": "https://github.com/waxa/statslife",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -30,5 +30,5 @@
     "@ionic/app-scripts": "0.0.47",
     "typescript": "2.0.9"
   },
-  "description": "AppName: An Ionic project"
+  "description": "Stats Life: control your proposites"
 }

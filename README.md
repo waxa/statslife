@@ -1,16 +1,7 @@
-# node-restapi-template
+# Stats Life
 
-express, passport, mongodb on server
+From https://github.com/waxa/node-restapi-template.git template
 
-ionic2 with sidemenu template on client
+### What's is this thing
 
-# usage
-
-* `git clone https://github.com/waxa/node-restapi-template.git project`
-* `cd project`
-* `npm install`
-* `cd app/client`
-* `npm install`
-* `npm run ionic:build`
-* `cd ../../`
-* `npm start`
+An app to monitorize your usual task 
