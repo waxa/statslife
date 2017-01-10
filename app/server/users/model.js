@@ -7,10 +7,15 @@ function initUser (mongoose) {
     },
 		password: {
       type: String,
-      equired: true
+      required: true
     },
-    config: {
-      dayStart: Number
+    dayStartHour: {
+      type: Number,
+      default: 0
+    },
+    dayStartMin: {
+      type: Number,
+      default: 0
     },
     tasks:[{
       type: mongoose.Schema.Types.ObjectId,

@@ -36,6 +36,7 @@ function setPassport (app) {
       passwordField: 'password'
     },
     function(username, password, done) {
+      console.log("strategy", username, password);
       findUser(username, function (err, user) {
         if (err) { return done(err); }
         if (!user) { return done(null, false); }
