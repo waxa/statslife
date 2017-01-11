@@ -6,27 +6,25 @@
 
 <ion-content padding>
   <ion-item-group>
-<!-- [(ngModel)]="user.username" -->
     <ion-item>
       <ion-label fixed>Username</ion-label>
-      <ion-input #term type="text"  (keyup)="search(term.value)" ></ion-input>
-      <ion-label><ion-icon [name]="usernameFree"></ion-icon></ion-label>
+      <ion-label><ion-icon [name]="userFreeIcon"></ion-icon></ion-label>
+      <ion-input type="text" (keyup.enter)="onClickRegistrar()" (input)="search($event.target.value)" [(ngModel)]="user.username"></ion-input>
     </ion-item>
 
     <ion-item>
 
       <ion-label fixed>Password</ion-label>
-      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+      <ion-input type="password" (keyup.enter)="onClickRegistrar()" [(ngModel)]="user.password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label fixed>Repeat Password</ion-label>
-      <ion-input type="password" [(ngModel)]="user.repeatPassword"></ion-input>
+      <ion-input type="password" (keyup.enter)="onClickRegistrar()" [(ngModel)]="user.repeatPassword"></ion-input>
     </ion-item>
 
     <ion-item>
-      <!-- [disabled]="isValid()" -->
-      <button ion-button block large (click)="onClickRegistrar()">Registrarse</button>
+      <button ion-button block large [disabled]="!validForm()" (click)="onClickRegistrar()">Registrarse</button>
     </ion-item>
 
   </ion-item-group>

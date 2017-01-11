@@ -1,38 +1,88 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
+import { UsersService } from '../../providers/users-service';
+
 @Component({
   selector: 'page-registro',
   templateUrl: 'registro.html'
 })
 export class RegistroPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  options:any = {
+    invalid: "md-alert",
+    valid: "md-checkmark",
+    loading: "md-refresh"
+  };
+  userFreeStream: Subject<string> = new Subject<string>();
+  userFreeObserver: Observable<any[]>;
+  userFreeIcon: string;
+  user:any = {};
 
-  usernameFree: string = "md-close"; // md-close md-checkmark
-  user:any = {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public usersService: UsersService
+  ) {
+    this.userFreeIcon = this.options.invalid;
+  };
 
   ionViewDidLoad() {
+    this.userFreeObserver = this.userFreeStream
+     .debounceTime(700)
+     .distinctUntilChanged()
+     .switchMap((nick: string) => this.usersService.isAvailable(nick));
+  };
 
-  }
+  private registrar(): void {
+    this.usersService.registerUser({
+      username: this.user.username,
+      password: this.user.password
+    })
+    .subscribe(
+      success => {
+          this.navCtrl.pop();
+      }, error => {
+        console.log("register error", error);
+      }
+    );
 
-  public search(term: string):void {
-    console.log(term);
-  }
+    this.user.password = "";
+    this.user.repeatPassword = ""
+    this.userFreeIcon = this.options.loading;
+  };
 
-  public onClickRegistrar():void {
-    console.log("registrar", this.user);
-  }
+  public search(nick: string): void {
+    this.userFreeIcon = this.options.loading;
+    this.userFreeStream.next(nick);
 
-  // public isValidUser():boolean {
-  //   console.log(this.user);
-  //   if (this.user.username != null && this.user.username != "" &&
-  //   this.user.password != null && this.user.repeatPassword != "" &&
-  //   this.user.email != null && this.user.email != "" &&
-  //   this.user.password === this.user.repeatPassword) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+    this.userFreeObserver.subscribe(
+      success => {
+        this.userFreeIcon = this.options.invalid;
+      }, error => {
+        if (error.status === 404){ this.userFreeIcon = this.options.valid; }
+        else { this.userFreeIcon = this.options.invalid; }
+      }
+    );
+  };
+
+  public validForm(): boolean {
+    if (!this.user || this.user == {}) { return false; }
+    if ( this.userFreeIcon === this.options.valid &&
+      this.user.password &&
+      this.user.password === this.user.repeatPassword ){
+      return true;
+    }
+    return false;
+  };
+
+  public onClickRegistrar(): void {
+    if (this.validForm()) {
+      this.registrar();
+    }
+  };
 
 }

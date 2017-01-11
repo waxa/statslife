@@ -8,14 +8,12 @@ const authMiddleware = require('./auth-middleware');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-function findUser (username, callback) {
-  User.findOne({
-    'username': username
-  },
-  function (err, user) {
+function findUser (userToFind, fields, callback) {
+  User.findOne( userToFind, fields )
+  .lean().exec( function (err, user) {
     if (err) { return callback(err); }
     if (!user) { return callback(null); }
-    return callback(null, user)
+    return callback(null, user);
   });
 };
 
@@ -28,7 +26,9 @@ function setPassport (app) {
   });
 
   passport.deserializeUser(function (username, cb) {
-    findUser(username, cb);
+    findUser({
+      username:username
+    },"_id username", cb);
   });
 
   passport.use(new LocalStrategy({
@@ -36,8 +36,11 @@ function setPassport (app) {
       passwordField: 'password'
     },
     function(username, password, done) {
-      console.log("strategy", username, password);
-      findUser(username, function (err, user) {
+      findUser({
+        username: username
+      },
+      "_id username password",
+      function (err, user) {
         if (err) { return done(err); }
         if (!user) { return done(null, false); }
         if (password !== user.password) { return done(null, false); }

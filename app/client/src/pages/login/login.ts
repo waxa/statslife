@@ -12,6 +12,8 @@ import { LoginService } from '../../providers/login-service';
 })
 export class LoginPage {
 
+  user:any = {};
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -19,34 +21,49 @@ export class LoginPage {
     public loginService: LoginService
   ) {
     this.hideMenu();
-  }
+  };
 
   ionViewDidLoad() {
     this.isLogged();
-  }
+  };
 
   private hideMenu(): void {
     this.menuCtrl.enable(false);
-  }
+  };
 
-  public isLogged() {
+  private login(): void {
+    this.loginService.login(this.user).subscribe(
+      logged => {
+        this.navCtrl.setRoot(DashboardPage);
+      },
+      error => this.hideMenu()
+    );
+  };
+
+  public validForm(): boolean {
+    if (!this.user || this.user == {}) { return false; }
+    if ( this.user.username && this.user.password ){
+      return true;
+    }
+    return false;
+  };
+
+  public isLogged(): void {
     this.loginService.isLogged().subscribe(
       logged => {
         this.navCtrl.setRoot(DashboardPage);
       },
       error => this.hideMenu());
-  }
+  };
 
   public onClickSignUp():void {
     this.navCtrl.push(RegistroPage);
-  }
+  };
 
   public onClickLogin():void {
-    this.loginService.login().subscribe(
-      logged => {
-        this.navCtrl.setRoot(DashboardPage);
-      },
-      error => this.hideMenu());
-  }
+    if ( this.validForm() ) {
+      this.login();
+    }
+  };
 
 }

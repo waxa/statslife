@@ -9,7 +9,6 @@ export class LoginService {
   apiUrl: string = 'http://localhost:27042/api/login';
 
   constructor(public http: Http) {
-    console.log('Hello LoginService Provider');
   }
 
   public isLogged(): Observable<any> {
@@ -17,8 +16,8 @@ export class LoginService {
     .catch(error => Observable.throw(error));
   };
 
-  public login(): Observable<any> {
-    return this.http.post(this.apiUrl, {username: "waxa", password: "waxa"})
+  public login(user:any): Observable<any> {
+    return this.http.post(this.apiUrl, user)
     .catch(error => Observable.throw(error));
   };
 

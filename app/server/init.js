@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
 const mongooseUri = require('./options').mongoUri;
 
 const app = express();
@@ -16,8 +16,9 @@ require('./users').model(mongoose);
 //setUp middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
-// app.use(cors());
+app.use(cors());
 app.use('/', express.static(__dirname + '/../client/www'));
+
 
 //setUp auth with passport
 require('./auth').init(app, mongooseUri);
