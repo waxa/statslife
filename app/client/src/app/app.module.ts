@@ -7,6 +7,7 @@ import { RegistroPage } from '../pages/registro/registro';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 
 import { LoginService } from '../providers/login-service';
+import { UsersService } from '../providers/users-service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoginService } from '../providers/login-service';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    {provide: LoginService, useClass: LoginService}
+    {provide: LoginService, useClass: LoginService},
+    {provide: UsersService, useClass: UsersService}
   ]
 })
 export class AppModule {}

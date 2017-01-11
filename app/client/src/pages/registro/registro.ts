@@ -9,10 +9,15 @@ export class RegistroPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
+  usernameFree: string = "md-close"; // md-close md-checkmark
   user:any = {}
 
   ionViewDidLoad() {
 
+  }
+
+  public search(term: string):void {
+    console.log(term);
   }
 
   public onClickRegistrar():void {

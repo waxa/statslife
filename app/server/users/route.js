@@ -13,7 +13,20 @@ function init (app) {
     res.sendStatus(200);
   };
 
+  function getUsersUsername (req, res) {
+    User.findOne({username: req.params.username}, "username", function (err, user) {
+      if (err) {
+        res.sendStatus(500);
+      }
+      if (user == null || !user) {
+        res.status(200).json(user);
+      }
+      res.sendStatus(400);
+    })
+  }
+
   app.get('/api/users', passport.authMiddleware(), getUsers);
+  app.get('/api/users/:username',  getUsersUsername);
   app.post('/api/users', passport.authMiddleware(), postUsers);
 
 };
