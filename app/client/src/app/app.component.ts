@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+
 import { LoginPage } from '../pages/login/login';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+//
+import { LoginService } from '../providers/login-service';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,14 +17,12 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public menuCtrl: MenuController) {
+  constructor( public platform: Platform, public loginService: LoginService) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Stats Life', component: LoginPage }
+      { title: 'Dashboard', component: DashboardPage }
     ];
-    this.menuCtrl.enable(false);
   }
 
   initializeApp() {
@@ -30,6 +32,14 @@ export class MyApp {
 
       StatusBar.styleDefault();
       Splashscreen.hide();
+    });
+  }
+
+  logout() {
+    this.loginService.logout().subscribe(success => {
+      this.nav.setRoot(LoginPage);
+    }, error => {
+      this.nav.setRoot(LoginPage);
     });
   }
 

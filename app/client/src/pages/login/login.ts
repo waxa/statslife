@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
+
+import { DashboardPage } from '../dashboard/dashboard';
+import { RegistroPage } from '../registro/registro';
+
 import { LoginService } from '../../providers/login-service';
 
 @Component({
@@ -7,8 +11,6 @@ import { LoginService } from '../../providers/login-service';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  showMenuIcon:boolean;
-
 
   constructor(
     public navCtrl: NavController,
@@ -19,33 +21,31 @@ export class LoginPage {
     this.hideMenu();
   }
 
-  ionViewDidLoad() {}
-
-  showMenu() {
-    this.menuCtrl.enable(true);
-    this.showMenuIcon = true;
+  ionViewDidLoad() {
+    this.isLogged();
   }
 
-  hideMenu() {
+  private hideMenu(): void {
     this.menuCtrl.enable(false);
-    this.showMenuIcon = false;
   }
 
-  hasLogin() {
-    this.loginService.loginState().subscribe(
-      logged => this.showMenu(),
+  public isLogged() {
+    this.loginService.isLogged().subscribe(
+      logged => {
+        this.navCtrl.setRoot(DashboardPage);
+      },
       error => this.hideMenu());
   }
 
-  removeLogin() {
-    this.loginService.logout().subscribe(
-      logged => this.hideMenu(),
-      error => this.hideMenu());
+  public onClickSignUp():void {
+    this.navCtrl.push(RegistroPage);
   }
 
-  doLogin() {
-    this.loginService.doLogin().subscribe(
-      logged => this.showMenu(),
+  public onClickLogin():void {
+    this.loginService.login().subscribe(
+      logged => {
+        this.navCtrl.setRoot(DashboardPage);
+      },
       error => this.hideMenu());
   }
 

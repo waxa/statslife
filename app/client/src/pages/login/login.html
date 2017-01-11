@@ -1,13 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle *ngIf="showMenuIcon">
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title text-center>Login</ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding>
-  <button ion-button (click)="hasLogin()"> get </button>
-  <button ion-button (click)="doLogin()"> post </button>
-  <button ion-button (click)="removeLogin()"> delete </button>
+  <button ion-button (click)="onClickLogin()"> Entrar </button>
+  <button ion-button (click)="onClickSignUp()"> Registrarse </button>
+  <button ion-button (click)="isLogged()"> GET </button>
 </ion-content>
